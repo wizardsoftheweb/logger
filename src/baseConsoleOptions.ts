@@ -3,7 +3,6 @@ import {
     ConsoleTransportOptions,
 } from "winston";
 
-
 import {consoleFormatter} from "./consoleFormatter";
 
 export const baseConsoleOptions: ConsoleTransportOptions = {

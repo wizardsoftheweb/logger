@@ -4,12 +4,22 @@
 
 This started out as an opinionated [`winston`](https://github.com/winstonjs/winston) setup, but I quickly realized I just wanted a `winston` decorator because trying to come up with unified logging is hard.
 
+This decorator adds a public member, `logger`, which you can prepopulate with your own instance of a `winston` logger or feed it options to do it for you.
+
+I'm going to use this for a few weeks before tagging `v1` because I want to make sure it's actually as simple as it should be.
+
 <!-- MarkdownTOC -->
 
 - [Installation](#installation)
-    - [Dev version](#devversion)
 - [Tests](#tests)
 - [Usage](#usage)
+    - [API](#api)
+        - [`LogsWithWinston(input?: LoggerInstance | LoggerOptions)`](#logswithwinstoninputloggerinstance|loggeroptions)
+    - [Examples](#examples)
+        - [Zero config](#zeroconfig)
+        - [Existing Instance](#existinginstance)
+        - [Create from Options](#createfromoptions)
+        - [`implements ILogsWithWinston`](#implementsilogswithwinston)
 - [Scope?](#scope)
 - [Roadmap](#roadmap)
     - [Main Features](#mainfeatures)
@@ -20,28 +30,139 @@ This started out as an opinionated [`winston`](https://github.com/winstonjs/wins
 
 ## Installation
 
-<!--
 ```bash
 npm install @wizardsoftheweb/logs-with-winston
-```
--->
-
-### Dev version
-
-```
-npm install --save git+https://github.com/wizardsoftheweb/logs-with-winston
 ```
 
 ## Tests
 
 ```bash
+npm install git+https://github.com/wizardsoftheweb/logs-with-winston
 npm t
 ```
 
 ## Usage
 
-TODO: write documentation after the API is done
+### API
 
+#### `LogsWithWinston(input?: LoggerInstance | LoggerOptions)`
+
+`input` is an existing `LoggerInstance`, a `LoggerOptions` object that can be passed to `winston` to create a new `LoggerInstance`, or an object that won't do anything.
+
+I've also exported an interface, `ILogsWithWinston`, that you can use for `implements` to appease code editors.
+
+### Examples
+
+#### Zero config
+```typescript
+import { Logger } from "winston";
+
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+
+@LogsWithWinston()
+class Foo {
+    constructor() {
+        // do nothing
+    }
+}
+
+const example = new Foo();
+(example as any).logger instanceof Logger;
+// true
+```
+
+#### Existing Instance
+```typescript
+import { Logger, transports } from "winston";
+
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+
+const logger = new Logger({
+    transports: [
+        new (transports.Console)(),
+        new (transports.File)({ filename: "somefile.log" }),
+    ],
+});
+
+@LogsWithWinston(logger)
+class Foo {
+    constructor() {
+        // do nothing
+    }
+}
+
+const example = new Foo();
+(example as any).logger === logger;
+// true
+```
+
+#### Create from Options
+```typescript
+import { config, Logger } from "winston";
+
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+
+@LogsWithWinston({ levels: config.syslog.levels })
+class Foo {
+    constructor() {
+        // do nothing
+    }
+}
+
+const example = new Foo();
+typeof (example as any).logger.silly === "undefined";
+// true
+```
+
+#### `implements ILogsWithWinston`
+
+Depending on your environment, this may or may not be necessary. Here's the problem:
+
+```typescript
+import { LoggerInstance, transports } from "winston";
+
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+
+@LogsWithWinston({ transports: [new transports.Console()] })
+class Foo {
+    constructor() {
+        // do nothing
+    }
+    public doSomething() {
+        this.logger.info("something");
+        // TSError: ⨯ Unable to compile TypeScript
+        // filename.ts (11,14): Property 'logger' does not exist on type 'Foo'. (2339)
+    }
+}
+```
+Here's how to solve it:
+```typescript
+import { LoggerInstance, transports } from "winston";
+
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+
+@LogsWithWinston({ transports: [new transports.Console()] })
+class Bar implements ILogsWithWinston {
+    /* Begin copypasta */
+    /* tslint:disable */
+    logger: LoggerInstance;
+    naivePrototypeChain?: string[];
+    whoamiWinston?: string;
+    /* tslint:enable */
+    /* End copypasta */
+    constructor() {
+        // do nothing
+    }
+    public doSomething() {
+        this.logger.info("something");
+    }
+}
+
+const example = new Bar();
+example.doSomething();
+// info: something
+```
+Because interfaces define a public contract, you can't declare the members with their intended scopes, hence the surrounding wall of comments. [The official mixin docs](https://www.typescriptlang.org/docs/handbook/mixins.html) recommend a similar solution.
 
 ## Scope?
 
@@ -57,11 +178,11 @@ Once all of these are finished, I'll release `v1`. Until then, `v0` should be us
 
 | Progess | Feature |
 | ------: | ------- |
-|     80% | Add decorator |
-|      0% | Test |
-|      0% | Export the full namespace |
-|      0% | Compile declaration file |
-|      0% | Compile docs from source |
+|    100% | Add decorator |
+|    100% | Test |
+|    100% | Export the full namespace |
+|    100% | Compile declaration file |
+|     70% | ~~Compile docs from source~~ Write docs |
 |      0% | Publish package on `npm` |
 
 ### Eventual features
@@ -71,3 +192,5 @@ These are things I'd like to add, but probably won't be included in `v1`. If not
 | Progess | Feature |
 | ------: | ------- |
 |      0% | [Greenkeeper](https://greenkeeper.io/) (or similar) integration |
+|      0% | Move examples to subdirectory |
+|      0% | Add `bin` script to attach `implements` filler |

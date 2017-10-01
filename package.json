@@ -13,6 +13,7 @@
   "scripts": {
     "preversion": "npm run lint && npm test",
     "postversion": "git push && git push --tags",
+    "prepublish": "ts-node build-declarations",
     "test": "cross-env NODE_ENV=test nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "compile:npm": "tsc --p tsconfig.npm.json",

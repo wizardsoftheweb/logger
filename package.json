@@ -51,5 +51,9 @@
   },
   "dependencies": {
     "winston": "^2.3.1"
+  },
+  "engines": {
+    "npm": ">=5",
+    "node": ">=6"
   }
 }

@@ -1,3 +1,4 @@
+import { ok } from "assert";
 import { Logger, transports } from "winston";
 
 import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
@@ -17,5 +18,5 @@ class Foo {
 }
 
 const example = new Foo();
-console.log((example as any).logger === logger);
-// true
+ok((example as any).logger === logger);
+// OK

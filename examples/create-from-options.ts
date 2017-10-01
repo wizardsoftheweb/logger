@@ -1,3 +1,4 @@
+import { ok } from "assert";
 import { config, Logger } from "winston";
 
 import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
@@ -10,5 +11,5 @@ class Foo {
 }
 
 const example = new Foo();
-console.log(typeof (example as any).logger.silly === "undefined");
-// true
+ok(typeof (example as any).logger.silly === "undefined");
+// OK

@@ -14,6 +14,7 @@ I'm going to use this for a few weeks before tagging `v1` because I want to make
 - [Tests](#tests)
 - [Usage](#usage)
     - [API](#api)
+        - [`LogsWithWinston(input?: LoggerInstance | LoggerOptions)`](#logswithwinstoninputloggerinstance|loggeroptions)
     - [Examples](#examples)
         - [Zero config](#zeroconfig)
         - [Existing Instance](#existinginstance)
@@ -44,7 +45,8 @@ npm t
 
 ### API
 
-**`LogsWithWinston(input?: LoggerInstance | LoggerOptions)`**
+#### `LogsWithWinston(input?: LoggerInstance | LoggerOptions)`
+
 `input` is an existing `LoggerInstance`, a `LoggerOptions` object that can be passed to `winston` to create a new `LoggerInstance`, or an object that won't do anything.
 
 I've also exported an interface, `ILogsWithWinston`, that you can use for `implements` to appease code editors.

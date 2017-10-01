@@ -1,7 +1,7 @@
 {
-  "name": "@wizardsoftheweb/logger",
+  "name": "@wizardsoftheweb/logs-with-winston",
   "version": "0.0.0",
-  "description": "An opinionated winston logger",
+  "description": "An simple decorator to add winston to existing files",
   "files": [
     "dist"
   ],
@@ -23,12 +23,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git://github.com/wizardsoftheweb/logger.git"
+    "url": "git://github.com/wizardsoftheweb/logs-with-winston.git"
   },
   "bugs": {
-    "url": "https://github.com/wizardsoftheweb/logger/issues"
+    "url": "https://github.com/wizardsoftheweb/logs-with-winston/issues"
   },
-  "homepage": "https://github.com/wizardsoftheweb/logger#readme",
+  "homepage": "https://github.com/wizardsoftheweb/logs-with-winston#readme",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",

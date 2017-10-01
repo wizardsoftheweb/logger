@@ -17,5 +17,5 @@ class Foo {
 }
 
 const example = new Foo();
-(example as any).logger === logger;
+console.log((example as any).logger === logger);
 // true

@@ -10,5 +10,5 @@ class Foo {
 }
 
 const example = new Foo();
-typeof (example as any).logger.silly === "undefined";
+console.log(typeof (example as any).logger.silly === "undefined");
 // true

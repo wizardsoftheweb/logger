@@ -1,8 +1,8 @@
-# `@wizardsoftheweb/logger`
+# `@wizardsoftheweb/logs-with-winston`
 
-[![Build Status](https://travis-ci.org/wizardsoftheweb/logger.svg?branch=master)](https://travis-ci.org/wizardsoftheweb/logger) [![Coverage Status](https://coveralls.io/repos/github/wizardsoftheweb/logger/badge.svg?branch=master)](https://coveralls.io/github/wizardsoftheweb/logger?branch=master)
+[![Build Status](https://travis-ci.org/wizardsoftheweb/logs-with-winston.svg?branch=master)](https://travis-ci.org/wizardsoftheweb/logs-with-winston) [![Coverage Status](https://coveralls.io/repos/github/wizardsoftheweb/logs-with-winston/badge.svg?branch=master)](https://coveralls.io/github/wizardsoftheweb/logs-with-winston?branch=master)
 
-This is an opinionated [`winston`](https://github.com/winstonjs/winston) setup.
+This started out as an opinionated [`winston`](https://github.com/winstonjs/winston) setup, but I quickly realized I just wanted a `winston` decorator because trying to come up with unified logging is hard.
 
 <!-- MarkdownTOC -->
 
@@ -22,14 +22,14 @@ This is an opinionated [`winston`](https://github.com/winstonjs/winston) setup.
 
 <!--
 ```bash
-npm install @wizardsoftheweb/logger
+npm install @wizardsoftheweb/logs-with-winston
 ```
 -->
 
 ### Dev version
 
 ```
-npm install --save git+https://github.com/wizardsoftheweb/logger
+npm install --save git+https://github.com/wizardsoftheweb/logs-with-winston
 ```
 
 ## Tests
@@ -57,14 +57,11 @@ Once all of these are finished, I'll release `v1`. Until then, `v0` should be us
 
 | Progess | Feature |
 | ------: | ------- |
-|      0% | Add console formatter |
-|      0% | Define levels |
-|      0% | Add contextual logging calls (i.e. precede entry with scope) |
-|      0% | Add decorator |
+|     80% | Add decorator |
+|      0% | Test |
 |      0% | Export the full namespace |
 |      0% | Compile declaration file |
 |      0% | Compile docs from source |
-|      0% | Incorporate `@todo`s somewhere prominent in the docs |
 |      0% | Publish package on `npm` |
 
 ### Eventual features

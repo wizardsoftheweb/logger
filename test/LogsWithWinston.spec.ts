@@ -16,11 +16,7 @@ import {
 } from "winston";
 import * as winston from "winston";
 
-import {
-    ClassDecorator,
-    ILogsWithWinston,
-    LogsWithWinston,
-} from "../src/LogsWithWinston";
+import { LogsWithWinston } from "../src/lib/LogsWithWinston";
 
 // This is a decorator, so we have to test lots of classes.
 /* tslint:disable:max-classes-per-file */

@@ -162,6 +162,7 @@ const example = new Bar();
 example.doSomething();
 // info: something
 ```
+Because interfaces define a public contract, you can't declare the members with their intended scopes, hence the surrounding wall of comments. [The official mixin docs](https://www.typescriptlang.org/docs/handbook/mixins.html) recommend a similar solution.
 
 ## Scope?
 

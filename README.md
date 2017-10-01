@@ -15,11 +15,7 @@ I'm going to use this for a few weeks before tagging `v1` because I want to make
 - [Usage](#usage)
     - [API](#api)
         - [`LogsWithWinston(input?: LoggerInstance | LoggerOptions)`](#logswithwinstoninputloggerinstance|loggeroptions)
-    - [Examples](#examples)
-        - [Zero config](#zeroconfig)
-        - [Existing Instance](#existinginstance)
-        - [Create from Options](#createfromoptions)
-        - [`implements ILogsWithWinston`](#implementsilogswithwinston)
+        - [Examples](#examples)
 - [Scope?](#scope)
 - [Roadmap](#roadmap)
     - [Main Features](#mainfeatures)
@@ -51,118 +47,9 @@ npm t
 
 I've also exported an interface, `ILogsWithWinston`, that you can use for `implements` to appease code editors.
 
-### Examples
+#### Examples
 
-#### Zero config
-```typescript
-import { Logger } from "winston";
-
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
-
-@LogsWithWinston()
-class Foo {
-    constructor() {
-        // do nothing
-    }
-}
-
-const example = new Foo();
-(example as any).logger instanceof Logger;
-// true
-```
-
-#### Existing Instance
-```typescript
-import { Logger, transports } from "winston";
-
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
-
-const logger = new Logger({
-    transports: [
-        new (transports.Console)(),
-        new (transports.File)({ filename: "somefile.log" }),
-    ],
-});
-
-@LogsWithWinston(logger)
-class Foo {
-    constructor() {
-        // do nothing
-    }
-}
-
-const example = new Foo();
-(example as any).logger === logger;
-// true
-```
-
-#### Create from Options
-```typescript
-import { config, Logger } from "winston";
-
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
-
-@LogsWithWinston({ levels: config.syslog.levels })
-class Foo {
-    constructor() {
-        // do nothing
-    }
-}
-
-const example = new Foo();
-typeof (example as any).logger.silly === "undefined";
-// true
-```
-
-#### `implements ILogsWithWinston`
-
-Depending on your environment, this may or may not be necessary. Here's the problem:
-
-```typescript
-import { LoggerInstance, transports } from "winston";
-
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
-
-@LogsWithWinston({ transports: [new transports.Console()] })
-class Foo {
-    constructor() {
-        // do nothing
-    }
-    public doSomething() {
-        this.logger.info("something");
-        // TSError: ⨯ Unable to compile TypeScript
-        // filename.ts (11,14): Property 'logger' does not exist on type 'Foo'. (2339)
-    }
-}
-```
-Here's how to solve it:
-```typescript
-import { LoggerInstance, transports } from "winston";
-
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
-
-@LogsWithWinston({ transports: [new transports.Console()] })
-class Bar implements ILogsWithWinston {
-    /* Begin copypasta */
-    /* tslint:disable */
-    logger: LoggerInstance;
-    naivePrototypeChain?: string[];
-    whoamiWinston?: string;
-    /* tslint:enable */
-    /* End copypasta */
-    constructor() {
-        // do nothing
-    }
-    public doSomething() {
-        this.logger.info("something");
-    }
-}
-
-const example = new Bar();
-example.doSomething();
-// info: something
-```
-Because interfaces define a public contract, you can't declare the members with their intended scopes, hence the surrounding wall of comments. [The official mixin docs](https://www.typescriptlang.org/docs/handbook/mixins.html) recommend a similar solution.
+I keep more in-depth [usage examples on GitHub](https://github.com/wizardsoftheweb/logs-with-winston/blob/master/examples).
 
 ## Scope?
 
@@ -192,5 +79,7 @@ These are things I'd like to add, but probably won't be included in `v1`. If not
 | Progess | Feature |
 | ------: | ------- |
 |      0% | [Greenkeeper](https://greenkeeper.io/) (or similar) integration |
-|      0% | Move examples to subdirectory |
+|     50% | Move examples to subdirectory |
+|      0% | Add build step for `examples/README` |
+|      0% | Provide a container for testing/examples |
 |      0% | Add `bin` script to attach `implements` filler |

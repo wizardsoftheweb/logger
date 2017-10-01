@@ -1,3 +1,6 @@
 {
-    "extends": "@wizardsoftheweb/nyc-config-typescript"
+    "extends": "@wizardsoftheweb/nyc-config-typescript",
+    "include": [
+        "src/lib/**/*.ts"
+    ]
 }

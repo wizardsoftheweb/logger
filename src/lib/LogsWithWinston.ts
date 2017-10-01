@@ -4,17 +4,7 @@ import {
     LoggerOptions,
 } from "winston";
 
-/**
- * This is verbatim from [the official docs](https://www.typescriptlang.org/docs/handbook/decorators.html)
- */
-type ClassDecorator = <T extends { new (...args: any[]): {} }>(constructor: T) => T;
-
-export interface ILogsWithWinston {
-    context?: string[];
-    logger: LoggerInstance;
-    whoami?: string;
-    [key: string]: any;
-}
+import {ClassDecorator} from "./interfaces";
 
 /**
  * This class decorator factory allows you to easily attach an instance of
@@ -26,7 +16,7 @@ export interface ILogsWithWinston {
  * @return {ClassDecorator}
  * Extends the passed-in class to have access to `winston` instance.
  */
-export function LogsWithWinston(input: LoggerInstance | LoggerOptions): ClassDecorator {
+export function LogsWithWinston(input?: LoggerInstance | LoggerOptions): ClassDecorator {
     // Check the type
     let insertedLogger: LoggerInstance;
     if (input instanceof Logger) {
@@ -40,9 +30,9 @@ export function LogsWithWinston(input: LoggerInstance | LoggerOptions): ClassDec
             /** @type {LoggerInstance} `winston` instance */
             public logger: LoggerInstance = insertedLogger;
             /** @type {string[]} A naive prototype chain */
-            protected context: string[];
+            protected naivePrototypeChain: string[];
             /** @type {string} The constructor's name */
-            private whoami: string;
+            private whoamiWinston: string;
             /**
              * Call super and attach inheritance info (if any)
              *
@@ -52,12 +42,12 @@ export function LogsWithWinston(input: LoggerInstance | LoggerOptions): ClassDec
             constructor(...args: any[])  {
                 super(...args);
                 // Save a private reference to `name`
-                this.whoami = this.constructor.name;
+                this.whoamiWinston = constructor.name;
                 // This will have elements if the class extends a decorated super
-                if (typeof this.context === "undefined") {
-                    this.context = [this.whoami];
+                if (typeof this.naivePrototypeChain === "undefined") {
+                    this.naivePrototypeChain = [this.whoamiWinston];
                 } else {
-                    this.context.push(this.whoami);
+                    this.naivePrototypeChain.push(this.whoamiWinston);
                 }
             }
         };

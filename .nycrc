@@ -1,6 +1,11 @@
 {
     "extends": "@wizardsoftheweb/nyc-config-typescript",
-    "include": [
-        "src/lib/**/*.ts"
-    ]
+    "nyc": {
+        "include": [
+            "src/lib/**/*.ts"
+        ],
+        "exclude": [
+            "examples/**/*.ts"
+        ]
+    }
 }

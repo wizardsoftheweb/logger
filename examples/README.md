@@ -12,6 +12,8 @@ followed by
 ```
 
 ## Zero config
+
+<!-- zero-config.ts -->
 ```typescript
 import { Logger } from "winston";
 
@@ -28,8 +30,11 @@ const example = new Foo();
 console.log((example as any).logger instanceof Logger);
 // true
 ```
+<!-- /zero-config.ts -->
 
 ## Existing Instance
+
+<!-- existing-instance.ts -->
 ```typescript
 import { Logger, transports } from "winston";
 
@@ -53,8 +58,11 @@ const example = new Foo();
 console.log((example as any).logger === logger);
 // true
 ```
+<!-- /existing-instance.ts -->
 
 ## Create from Options
+
+<!-- create-from-options.ts -->
 ```typescript
 import { config, Logger } from "winston";
 
@@ -71,11 +79,13 @@ const example = new Foo();
 console.log(typeof (example as any).logger.silly === "undefined");
 // true
 ```
+<!-- /create-from-options.ts -->
 
 ## `implements ILogsWithWinston`
 
 Depending on your environment, this may or may not be necessary. Here's the problem:
 
+<!-- implements-ilogswithwinston-failure.ts -->
 ```typescript
 import { LoggerInstance, transports } from "winston";
 
@@ -93,11 +103,13 @@ class Foo {
     }
 }
 ```
+<!-- /implements-ilogswithwinston-failure.ts -->
 Here's how to solve it:
+<!-- implements-ilogswithwinston-solution.ts -->
 ```typescript
 import { LoggerInstance, transports } from "winston";
 
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+import { ILogsWithWinston, LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ transports: [new transports.Console()] })
 class Bar implements ILogsWithWinston {
@@ -119,5 +131,7 @@ class Bar implements ILogsWithWinston {
 const example = new Bar();
 example.doSomething();
 // info: something
+
 ```
+<!-- /implements-ilogswithwinston-solution.ts -->
 Because interfaces define a public contract, you can't declare the members with their intended scopes, hence the surrounding wall of comments. [The official mixin docs](https://www.typescriptlang.org/docs/handbook/mixins.html) recommend a similar solution.

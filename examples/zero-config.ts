@@ -10,5 +10,5 @@ class Foo {
 }
 
 const example = new Foo();
-(example as any).logger instanceof Logger;
+console.log((example as any).logger instanceof Logger);
 // true

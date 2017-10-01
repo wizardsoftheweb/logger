@@ -6,6 +6,10 @@ git clone https://github.com/wizardsoftheweb/logs-with-winston.github.com
 cd logs-with-winston/examples
 npm install
 ```
+followed by
+```bash
+./node_modules/.bin/ts-node <filename>
+```
 
 ## Zero config
 ```typescript
@@ -21,7 +25,7 @@ class Foo {
 }
 
 const example = new Foo();
-(example as any).logger instanceof Logger;
+console.log((example as any).logger instanceof Logger);
 // true
 ```
 
@@ -46,7 +50,7 @@ class Foo {
 }
 
 const example = new Foo();
-(example as any).logger === logger;
+console.log((example as any).logger === logger);
 // true
 ```
 
@@ -64,7 +68,7 @@ class Foo {
 }
 
 const example = new Foo();
-typeof (example as any).logger.silly === "undefined";
+console.log(typeof (example as any).logger.silly === "undefined");
 // true
 ```
 

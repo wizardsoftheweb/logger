@@ -1,6 +1,6 @@
 import { Logger, transports } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 const logger = new Logger({
     transports: [

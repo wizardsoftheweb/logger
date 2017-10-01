@@ -1,6 +1,6 @@
 import { LoggerInstance, transports } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ transports: [new transports.Console()] })
 class Foo {

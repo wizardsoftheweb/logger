@@ -1,5 +1,12 @@
 # `@wizardsoftheweb/logs-with-winston` Examples
 
+These examples should illustrate how to use the API. If you'd like to run them yourself,
+```bash
+git clone https://github.com/wizardsoftheweb/logs-with-winston.github.com
+cd logs-with-winston/examples
+npm install
+```
+
 ## Zero config
 ```typescript
 import { Logger } from "winston";
@@ -22,7 +29,7 @@ const example = new Foo();
 ```typescript
 import { Logger, transports } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 const logger = new Logger({
     transports: [
@@ -47,7 +54,7 @@ const example = new Foo();
 ```typescript
 import { config, Logger } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ levels: config.syslog.levels })
 class Foo {
@@ -68,7 +75,7 @@ Depending on your environment, this may or may not be necessary. Here's the prob
 ```typescript
 import { LoggerInstance, transports } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ transports: [new transports.Console()] })
 class Foo {
@@ -86,7 +93,7 @@ Here's how to solve it:
 ```typescript
 import { LoggerInstance, transports } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ transports: [new transports.Console()] })
 class Bar implements ILogsWithWinston {

@@ -1,9 +1,9 @@
 import { LoggerInstance, transports } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { ILogsWithWinston, LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ transports: [new transports.Console()] })
-class Bar implements LogsWithWinston.ILogsWithWinston {
+class Bar implements ILogsWithWinston {
     /* Begin copypasta */
     /* tslint:disable */
     logger: LoggerInstance;

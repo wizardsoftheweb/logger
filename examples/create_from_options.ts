@@ -1,6 +1,6 @@
 import { config, Logger } from "winston";
 
-import * as LogsWithWinston from "@wizardsoftheweb/logs-with-winston";
+import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ levels: config.syslog.levels })
 class Foo {

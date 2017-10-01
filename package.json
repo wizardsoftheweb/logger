@@ -55,5 +55,13 @@
   "engines": {
     "npm": ">=5",
     "node": ">=6"
-  }
+  },
+  "keywords": [
+    "typescript",
+    "es.next",
+    "decorator",
+    "class decorator",
+    "winston",
+    "logging"
+  ]
 }

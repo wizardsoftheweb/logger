@@ -59,10 +59,9 @@ for (const filename of unbundledDeclarations) {
     if (filename.match(/LogsWithWinston\.d\.ts$/)) {
         logger.silly("Creating main function declaration");
         functionDeclaration = contents;
-    } else {
-        logger.silly("Appending to namespace declarations");
-        declaration += contents.replace(/^(\s*)declare ?/gmi, "$1");
     }
+    logger.silly("Appending to namespace declarations");
+    declaration += contents.replace(/^(\s*)declare ?/gmi, "$1");
 }
 
 let match: any;

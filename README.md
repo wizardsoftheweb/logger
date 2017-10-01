@@ -192,4 +192,5 @@ These are things I'd like to add, but probably won't be included in `v1`. If not
 | Progess | Feature |
 | ------: | ------- |
 |      0% | [Greenkeeper](https://greenkeeper.io/) (or similar) integration |
-|      0% | Move examples to subdirectory
+|      0% | Move examples to subdirectory |
+|      0% | Add `bin` script to attach `implements` filler |

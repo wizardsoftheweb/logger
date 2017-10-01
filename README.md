@@ -135,7 +135,7 @@ class Foo {
     }
 }
 ```
-Here's how to solve it
+Here's how to solve it:
 ```typescript
 import { LoggerInstance, transports } from "winston";
 

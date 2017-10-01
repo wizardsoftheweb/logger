@@ -43,7 +43,7 @@ npmRun("compile:npm");
 logger.info("Starting declaration file bundle");
 
 logger.verbose("Searching dist/ for declaration files");
-const unbundledDeclarations = shelljs.find(path.join(__dirname, "dist"))
+const unbundledDeclarations = shelljs.find(path.join(__dirname, "dist", "lib"))
     .filter((filename: string) => {
         return filename.match(/\.d\.ts$/);
     });

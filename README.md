@@ -57,10 +57,10 @@ Once all of these are finished, I'll release `v1`. Until then, `v0` should be us
 
 | Progess | Feature |
 | ------: | ------- |
-|     80% | Add decorator |
-|      0% | Test |
-|      0% | Export the full namespace |
-|      0% | Compile declaration file |
+|    100% | Add decorator |
+|    100% | Test |
+|    100% | Export the full namespace |
+|    100% | Compile declaration file |
 |      0% | Compile docs from source |
 |      0% | Publish package on `npm` |
 

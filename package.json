@@ -14,6 +14,7 @@
     "preversion": "npm run lint && npm test",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "ts-node build-declarations",
+    "postpublish": "ts-node build-examples",
     "test": "cross-env NODE_ENV=test nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "compile:npm": "tsc --p tsconfig.npm.json",

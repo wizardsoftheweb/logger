@@ -6,9 +6,16 @@ git clone https://github.com/wizardsoftheweb/logs-with-winston.github.com
 cd logs-with-winston/examples
 npm install
 ```
+followed by
+```bash
+./node_modules/.bin/ts-node <filename>
+```
 
 ## Zero config
+
+<!-- zero-config.ts -->
 ```typescript
+import { ok } from "assert";
 import { Logger } from "winston";
 
 import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
@@ -21,12 +28,16 @@ class Foo {
 }
 
 const example = new Foo();
-(example as any).logger instanceof Logger;
-// true
+ok((example as any).logger instanceof Logger);
+// OK
 ```
+<!-- /zero-config.ts -->
 
 ## Existing Instance
+
+<!-- existing-instance.ts -->
 ```typescript
+import { ok } from "assert";
 import { Logger, transports } from "winston";
 
 import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
@@ -46,12 +57,16 @@ class Foo {
 }
 
 const example = new Foo();
-(example as any).logger === logger;
-// true
+ok((example as any).logger === logger);
+// OK
 ```
+<!-- /existing-instance.ts -->
 
 ## Create from Options
+
+<!-- create-from-options.ts -->
 ```typescript
+import { ok } from "assert";
 import { config, Logger } from "winston";
 
 import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
@@ -64,14 +79,16 @@ class Foo {
 }
 
 const example = new Foo();
-typeof (example as any).logger.silly === "undefined";
-// true
+ok(typeof (example as any).logger.silly === "undefined");
+// OK
 ```
+<!-- /create-from-options.ts -->
 
 ## `implements ILogsWithWinston`
 
 Depending on your environment, this may or may not be necessary. Here's the problem:
 
+<!-- implements-ilogswithwinston-failure.ts -->
 ```typescript
 import { LoggerInstance, transports } from "winston";
 
@@ -89,11 +106,13 @@ class Foo {
     }
 }
 ```
+<!-- /implements-ilogswithwinston-failure.ts -->
 Here's how to solve it:
+<!-- implements-ilogswithwinston-solution.ts -->
 ```typescript
 import { LoggerInstance, transports } from "winston";
 
-import { LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
+import { ILogsWithWinston, LogsWithWinston } from "@wizardsoftheweb/logs-with-winston";
 
 @LogsWithWinston({ transports: [new transports.Console()] })
 class Bar implements ILogsWithWinston {
@@ -116,4 +135,5 @@ const example = new Bar();
 example.doSomething();
 // info: something
 ```
+<!-- /implements-ilogswithwinston-solution.ts -->
 Because interfaces define a public contract, you can't declare the members with their intended scopes, hence the surrounding wall of comments. [The official mixin docs](https://www.typescriptlang.org/docs/handbook/mixins.html) recommend a similar solution.

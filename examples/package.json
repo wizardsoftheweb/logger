@@ -10,7 +10,7 @@
   "author": "CJ Harries <cj@wizardsoftheweb.pro> (https://wizardsoftheweb.pro/)",
   "license": "ISC",
   "dependencies": {
-    "@wizardsoftheweb/logs-with-winston": "^0.2.3",
+    "@wizardsoftheweb/logs-with-winston": "^0.2.4",
     "ts-node": "^3.3.0"
   }
 }

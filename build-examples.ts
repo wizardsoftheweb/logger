@@ -19,7 +19,7 @@ if (!shelljs.which("git")) {
     throw new Error("git not found");
 }
 
-const branch = shelljs.exec("rev-parse --abbrev-ref HEAD").stdout as string;
+const branch = shelljs.exec("git rev-parse --abbrev-ref HEAD").stdout as string;
 if (branch !== "master") {
     const wrongBranch = "This script must be run on the master branch";
     logger.error(wrongBranch);

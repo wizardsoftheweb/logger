@@ -80,6 +80,6 @@ These are things I'd like to add, but probably won't be included in `v1`. If not
 | ------: | ------- |
 |      0% | [Greenkeeper](https://greenkeeper.io/) (or similar) integration |
 |     50% | Move examples to subdirectory |
-|      0% | Add build step for `examples/README` |
-|      0% | Provide a container for testing/examples |
+|     50% | Add build step for `examples/README` |
+|      0% | ~~Provide a container for testing/examples~~ |
 |      0% | Add `bin` script to attach `implements` filler |

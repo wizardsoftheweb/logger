@@ -37,8 +37,8 @@ shelljs.mkdir("-p", tmp);
 logger.info("Linting src/");
 npmRun("lint");
 
-logger.info("Building dist/");
-npmRun("compile:npm");
+logger.info("Building dist/ with comments");
+npmRun("compile:declarations");
 
 logger.info("Starting declaration file bundle");
 
@@ -176,8 +176,11 @@ export = LogsWithWinston;
     // remove trailing whitespace
     .replace(/\s*\n$/m, EOL);
 
-logger.verbose("Removing unbundled definition files");
-shelljs.rm(unbundledDeclarations);
+logger.verbose("Removing commented build");
+shelljs.rm("-rf", path.join(__dirname, "dist"));
+
+logger.info("Building dist/ for publication");
+npmRun("compile:npm");
 
 const outFile = path.join(__dirname, "dist", "index.d.ts");
 logger.verbose(`Writing ${outFile}`);

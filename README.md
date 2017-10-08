@@ -33,13 +33,16 @@ npm install @wizardsoftheweb/logs-with-winston
 ```
 In a dev environment, you might also consider installing the generator package:
 ```bash
-npm install @wizardsoftheweb/cli-logs-with-winston
+npm install --save-dev @wizardsoftheweb/cli-logs-with-winston
 ```
 
 ## Tests
 
+In the interest of keeping the final package as small as possible, none of the tests are installed. Instead, you'll need to clone the repo.
 ```bash
-npm install git+https://github.com/wizardsoftheweb/logs-with-winston
+git clone https://github.com/wizardsoftheweb/logs-with-winston.git
+cd logs-with-winston
+npm install
 npm t
 ```
 

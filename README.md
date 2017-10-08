@@ -8,6 +8,8 @@ This decorator adds a public member, `logger`, which you can prepopulate with yo
 
 I'm going to use this for a few weeks before tagging `v1` because I want to make sure it's actually as simple as it should be.
 
+You might also be interested in [`@wizardsoftheweb/cli-logs-with-winston`](https://www.npmjs.com/package/@wizardsoftheweb/cli-logs-with-winston). It provides a QOL `.bin` script that can automatically decorate existing files and generate pre-decorated skeletons.
+
 <!-- MarkdownTOC -->
 
 - [Installation](#installation)
@@ -15,7 +17,7 @@ I'm going to use this for a few weeks before tagging `v1` because I want to make
 - [Usage](#usage)
     - [API](#api)
         - [`LogsWithWinston(input?: LoggerInstance | LoggerOptions)`](#logswithwinstoninputloggerinstance|loggeroptions)
-        - [Examples](#examples)
+    - [Examples](#examples)
 - [Scope?](#scope)
 - [Roadmap](#roadmap)
     - [Main Features](#mainfeatures)
@@ -28,6 +30,10 @@ I'm going to use this for a few weeks before tagging `v1` because I want to make
 
 ```bash
 npm install @wizardsoftheweb/logs-with-winston
+```
+In a dev environment, you might also consider installing the generator package:
+```bash
+npm install @wizardsoftheweb/cli-logs-with-winston
 ```
 
 ## Tests
@@ -47,7 +53,7 @@ npm t
 
 I've also exported an interface, `ILogsWithWinston`, that you can use for `implements` to appease code editors.
 
-#### Examples
+### Examples
 
 I keep more in-depth [usage examples on GitHub](https://github.com/wizardsoftheweb/logs-with-winston/blob/master/examples).
 

@@ -33,7 +33,8 @@ const examplesPath = join(__dirname, "examples");
 
 logger.info(`Updating ${config.name}`);
 shelljs.cd(examplesPath);
-shelljs.exec(`npm update ${config.name}`);
+shelljs.exec(`npm remove ${config.name}`);
+shelljs.exec(`npm install ${config.name}`);
 
 logger.info("Rebuilding README");
 const insertRegExp = /<!-- ([^ ]*) -->\s*```(\w+)?[\s\S]*?```\s*<!-- \/\1 -->/g;
